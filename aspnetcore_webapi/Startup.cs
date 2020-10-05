@@ -53,7 +53,8 @@ namespace aspnetcore_webapi
                 options.User.AllowedUserNameCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
                 options.User.RequireUniqueEmail = true;
             }).AddEntityFrameworkStores<ApplicationDbContext>()
-              .AddDefaultTokenProviders();
+              .AddDefaultTokenProviders()
+              .AddTokenProvider<EmailConfirmationTokenProvider<ApplicationUser>>("emailConfirmation");
 
             services.AddAuthentication(options =>
             {
@@ -77,6 +78,7 @@ namespace aspnetcore_webapi
 
             services.Configure<DataProtectionTokenProviderOptions>(options =>
                 options.TokenLifespan = TimeSpan.FromHours(2));
+
             services.Configure<EmailConfirmationTokenProviderOptions>(options =>
                 options.TokenLifespan = TimeSpan.FromDays(3));
 
