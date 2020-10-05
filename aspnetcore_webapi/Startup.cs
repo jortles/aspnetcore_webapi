@@ -66,13 +66,12 @@ namespace aspnetcore_webapi
                 bearer.SaveToken = true;
                 bearer.TokenValidationParameters = new TokenValidationParameters
                 {
-                    ValidateIssuerSigningKey = false,
+                    ValidateIssuerSigningKey = true,
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(Configuration["JwtKey"])),
                     ValidateIssuer = false,
                     ValidateAudience = false,
-                    RequireSignedTokens = false,
-                    ValidateActor = false,
-                    SignatureValidator = delegate (string token, TokenValidationParameters validationParameters) { return new JwtSecurityToken(token); }
+                    SignatureValidator = delegate (string token, TokenValidationParameters validationParameters) { return new JwtSecurityToken(token); },
+                    ClockSkew = TimeSpan.Zero
                 };
             });
 

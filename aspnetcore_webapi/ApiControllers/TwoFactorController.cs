@@ -5,6 +5,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using aspnetcore_webapi.Controllers;
 using aspnetcore_webapi.Models;
 using aspnetcore_webapi.Services;
 using aspnetcore_webapi.ViewModels;
@@ -40,12 +41,12 @@ namespace aspnetcore_webapi.ApiControllers
         [HttpPost]
         public async Task<ActionResult<LoginViewModel>> Post([FromBody] TwoFactorViewModel model)
         {
-            if (string.IsNullOrWhiteSpace(model.Username) || string.IsNullOrWhiteSpace(model.Password) || string.IsNullOrWhiteSpace(model.TwoFactorValue))
+            if (string.IsNullOrWhiteSpace(model.Email) || string.IsNullOrWhiteSpace(model.Password) || string.IsNullOrWhiteSpace(model.TwoFactorValue))
             {
                 return new UnauthorizedResult();
             }
 
-            ApplicationUser user = await _userManager.FindByNameAsync(model.Username);
+            ApplicationUser user = await _userManager.FindByNameAsync(model.Email);
             if (user != null)
             {
                 Microsoft.AspNetCore.Identity.SignInResult result = await _signInManager.CheckPasswordSignInAsync(user, model.Password, false);
@@ -59,10 +60,8 @@ namespace aspnetcore_webapi.ApiControllers
                         string role = "";
                         if (roles.Contains("Admin"))
                             role = "Admin";
-                        else if (roles.Contains("Manager"))
-                            role = "Manager";
-                        else if (roles.Contains("Employee"))
-                            role = "Employee";
+                        else if (roles.Contains("User"))
+                            role = "User";
 
 
 
@@ -95,13 +94,13 @@ namespace aspnetcore_webapi.ApiControllers
             if (Url.IsLocalUrl(returnUrl))
                 return Redirect(returnUrl);
             else
-                return RedirectToAction(nameof(ProfileController), "Profile");
+                return RedirectToAction(nameof(HomeController), "Index");
         }
     }
 
     public class TwoFactorViewModel
     {
-        public string Username { get; set; }
+        public string Email { get; set; }
         public string Password { get; set; }
         public string TwoFactorValue { get; set; }
     }

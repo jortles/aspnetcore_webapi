@@ -18,8 +18,8 @@ namespace aspnetcore_webapi.Services
         public EmailService(IConfiguration configuration)
         {
             _configuration = configuration;
-            _client = new SmtpClient(_configuration["Email:Host"], Convert.ToInt32(_configuration["Email:Port"]));
-            _client.Credentials = new NetworkCredential(_configuration["Email:Username"], _configuration["Email:Password"]);
+            _client = new SmtpClient(_configuration["EmailConfiguration:SmtpServer"], Convert.ToInt32(_configuration["EmailConfiguration:Port"]));
+            _client.Credentials = new NetworkCredential(_configuration["EmailConfiguration:Username"], _configuration["EmailConfiguration:Password"]);
             _client.EnableSsl = true;
         }
 
