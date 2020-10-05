@@ -17,12 +17,13 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <ul class="navbar-nav flex-grow-1">
+                    <ul class="nav navbar-nav navbar-right">
+                        @await Html.PartialAsync("_RegisterPartial")
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a id="login" href="#" class="nav-link text-dark" data-toggle="modal" data-target="#modalLogin">Log In</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a id="signout" href="#" class="nav-link text-dark d-none">Sign Out</a>
                         </li>
                     </ul>
                 </div>
@@ -35,11 +36,124 @@
         </main>
     </div>
 
+    <div class="modal fade" id="modalLogin">
+        <div class="dialog-modal modal-dialog">
+            <div class="login-modal modal-content">
+                <div class="modal-header">
+                    Login
+                    <span class="text-danger" id="loginStatus"></span>
+                </div>
+                <div class="modal-body">
+                    <div id="loginUsernamePasswordContainer">
+                        <div class="form-group">
+                            <input type="text" name="Username" placeholder="Enter your username" id="loginUsername" />
+                            <label for="loginUsername">Username</label>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" name="Password" placeholder="Enter your password" id="loginPassword" />
+                            <label for="loginPassword">Password</label>
+                        </div>
+                    </div>
+                    <div class="form-group d-none" id="loginTwoFactorFormGroup">
+                        <input type="password" name="Password" placeholder="Enter your code" id="loginTwoFactorValue" />
+                        <label for="TwoFactorValue">Enter TwoFactor Code</label>
+                    </div>
+                    <div id="loginSpinner" class="spinner-border text-primary d-none"></div>
+                    <button class="btn btn-outline-primary btn-block" id="loginButton" type="submit">Log In</button>
+                    <button id="forgotpButton" class="btn btn-outline-danger btn-block" data-dismiss="modal" data-toggle="modal" data-target="#modalForgot">Forgot Password?</button>
+                    <button class="d-none btn-primary btn" id="confirmTwoFactorButton" type="submit">Verify SMS Code</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalForgot">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    Password Reset
+                    <span class="text-danger" id="forgotpasswordStatus"></span>
+                </div>
+                <div class="modal-body">
+                    <div id="forgotpasswordContainer">
+                        <div class="form-group">
+                            <input type="text" name="email" placeholder="Enter your userame" id="forgotEmail" />
+                            <label for="forgotEmail">Enter your email address</label>
+                        </div>
+                    </div>
+                    <button class="btn btn-outline-primary btn-block" id="passwordresetButton" type="submit">Send Link</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" tabindex="-1" role="dialog" id="registeradminModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Create Admin</h5>
+                    <span class="text-danger" id="registerStatus"></span>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div id="adminregisterContainer">
+                        <div class="form-group">
+                            <input type="text"
+                                   name="FirstName"
+                                   id="firstName"
+                                   placeholder="Enter your First Name" />
+                            <label for="firstName">First Name</label>
+                        </div>
+                        <div class="form-group">
+                            <input type="text"
+                                   name="LastName"
+                                   id="lastName"
+                                   placeholder="Enter your Last Name" />
+                            <label for="lastName">Last Name</label>
+                        </div>
+                        <div class="form-group">
+                            <input type="text"
+                                   name="Email"
+                                   id="email"
+                                   placeholder="Enter your Email Address" />
+                            <label for="email">Email Address</label>
+                        </div>
+                        <div class="form-group">
+                            <input type="hidden"
+                                   name="Username"
+                                   id="username"
+                                   value="admin" />
+                        </div>
+                        <div class="form-group">
+                            <input type="password"
+                                   name="Password"
+                                   id="password"
+                                   placeholder="Enter Password" />
+                            <label for="password">Password</label>
+                        </div>
+                        <div class="form-group">
+                            <input type="password"
+                                   name="ConfirmPassword"
+                                   id="confirmPassword"
+                                   placeholder="Confirm Password" />
+                            <label for="confirmPassword">Confirm Password</label>
+                        </div>
+                        <button id="registeradminButton" type="submit" class="btn btn-outline-danger btn-block">Create Admin</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <footer class="border-top footer text-muted">
         <div class="container">
             &copy; 2020 - aspnetcore_webapi - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
+
+    <script src="~/js/registeradmin.js"></script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
