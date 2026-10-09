@@ -5,9 +5,9 @@
 $(function () {
     $("#loaderbody").addClass('hide');
 
-    $(document).bind('ajaxStart', function () {
+    $(document).on('ajaxStart', function () {
         $("#loaderbody").removeClass('hide');
-    }).bind('ajaxStop', function () {
+    }).on('ajaxStop', function () {
         $("#loaderbody").addClass('hide');
     });
 });

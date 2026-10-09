@@ -12,7 +12,7 @@
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">aspnetcore_webapi</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -20,7 +20,7 @@
                     <ul class="nav navbar-nav navbar-right">
                         @await Html.PartialAsync("_RegisterPartial")
                         <li class="nav-item">
-                            <a id="login" href="#" class="nav-link text-dark" data-toggle="modal" data-target="#modalLogin">Log In</a>
+                            <a id="login" href="#" class="nav-link text-dark" data-bs-toggle="modal" data-bs-target="#modalLogin">Log In</a>
                         </li>
                         <li class="nav-item">
                             <a id="signout" href="#" class="nav-link text-dark d-none">Sign Out</a>
@@ -45,22 +45,22 @@
                 </div>
                 <div class="modal-body">
                     <div id="loginUsernamePasswordContainer">
-                        <div class="form-group">
+                        <div class="mb-3">
                             <input type="text" name="Username" placeholder="Enter your username" id="loginUsername" />
                             <label for="loginUsername">Username</label>
                         </div>
-                        <div class="form-group">
+                        <div class="mb-3">
                             <input type="password" name="Password" placeholder="Enter your password" id="loginPassword" />
                             <label for="loginPassword">Password</label>
                         </div>
                     </div>
-                    <div class="form-group d-none" id="loginTwoFactorFormGroup">
+                    <div class="mb-3 d-none" id="loginTwoFactorFormGroup">
                         <input type="password" name="Password" placeholder="Enter your code" id="loginTwoFactorValue" />
                         <label for="TwoFactorValue">Enter TwoFactor Code</label>
                     </div>
                     <div id="loginSpinner" class="spinner-border text-primary d-none"></div>
-                    <button class="btn btn-outline-primary btn-block" id="loginButton" type="submit">Log In</button>
-                    <button id="forgotpButton" class="btn btn-outline-danger btn-block" data-dismiss="modal" data-toggle="modal" data-target="#modalForgot">Forgot Password?</button>
+                    <button class="btn btn-outline-primary w-100" id="loginButton" type="submit">Log In</button>
+                    <button id="forgotpButton" class="btn btn-outline-danger w-100" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#modalForgot">Forgot Password?</button>
                     <button class="d-none btn-primary btn" id="confirmTwoFactorButton" type="submit">Verify SMS Code</button>
                 </div>
             </div>
@@ -76,12 +76,12 @@
                 </div>
                 <div class="modal-body">
                     <div id="forgotpasswordContainer">
-                        <div class="form-group">
+                        <div class="mb-3">
                             <input type="text" name="email" placeholder="Enter your userame" id="forgotEmail" />
                             <label for="forgotEmail">Enter your email address</label>
                         </div>
                     </div>
-                    <button class="btn btn-outline-primary btn-block" id="passwordresetButton" type="submit">Send Link</button>
+                    <button class="btn btn-outline-primary w-100" id="passwordresetButton" type="submit">Send Link</button>
                 </div>
             </div>
         </div>
@@ -93,54 +93,52 @@
                 <div class="modal-header">
                     <h5 class="modal-title">Create Admin</h5>
                     <span class="text-danger" id="registerStatus"></span>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <div id="adminregisterContainer">
-                        <div class="form-group">
+                        <div class="mb-3">
                             <input type="text"
                                    name="FirstName"
                                    id="firstName"
                                    placeholder="Enter your First Name" />
                             <label for="firstName">First Name</label>
                         </div>
-                        <div class="form-group">
+                        <div class="mb-3">
                             <input type="text"
                                    name="LastName"
                                    id="lastName"
                                    placeholder="Enter your Last Name" />
                             <label for="lastName">Last Name</label>
                         </div>
-                        <div class="form-group">
+                        <div class="mb-3">
                             <input type="text"
                                    name="Email"
                                    id="email"
                                    placeholder="Enter your Email Address" />
                             <label for="email">Email Address</label>
                         </div>
-                        <div class="form-group">
+                        <div class="mb-3">
                             <input type="hidden"
                                    name="Username"
                                    id="username"
                                    value="admin" />
                         </div>
-                        <div class="form-group">
+                        <div class="mb-3">
                             <input type="password"
                                    name="Password"
                                    id="password"
                                    placeholder="Enter Password" />
                             <label for="password">Password</label>
                         </div>
-                        <div class="form-group">
+                        <div class="mb-3">
                             <input type="password"
                                    name="ConfirmPassword"
                                    id="confirmPassword"
                                    placeholder="Confirm Password" />
                             <label for="confirmPassword">Confirm Password</label>
                         </div>
-                        <button id="registeradminButton" type="submit" class="btn btn-outline-danger btn-block">Create Admin</button>
+                        <button id="registeradminButton" type="submit" class="btn btn-outline-danger w-100">Create Admin</button>
                     </div>
                 </div>
             </div>
