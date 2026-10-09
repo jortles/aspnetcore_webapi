@@ -17,6 +17,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.IdentityModel.Tokens;
 
 namespace aspnetcore_webapi
@@ -64,6 +65,7 @@ namespace aspnetcore_webapi
             {
                 bearer.RequireHttpsMetadata = false;
                 bearer.SaveToken = true;
+                bearer.UseSecurityTokenValidators = true;
                 bearer.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuerSigningKey = true,
@@ -88,11 +90,12 @@ namespace aspnetcore_webapi
             services.AddScoped<IMailKitSender, MailKitSender>();
 
             // Auto Mapper Configurations
-            services.AddAutoMapper(typeof(Startup));
+            services.AddAutoMapper(cfg => cfg.LicenseKey = Configuration["AutoMapper:LicenseKey"], typeof(Startup));
             var mappingConfig = new MapperConfiguration(mc =>
             {
+                mc.LicenseKey = Configuration["AutoMapper:LicenseKey"];
                 mc.AddProfile(new MapProfile());
-            });
+            }, NullLoggerFactory.Instance);
             IMapper mapper = mappingConfig.CreateMapper();
 
             services.AddSingleton(mapper);

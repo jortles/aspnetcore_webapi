@@ -34,7 +34,7 @@ namespace aspnetcore_webapi.MailKit
         private MimeMessage CreateEmailMessage(MessageService message)
         {
             var emailMessage = new MimeMessage();
-            emailMessage.From.Add(new MailboxAddress(_mailkitConfig.From));
+            emailMessage.From.Add(new MailboxAddress(string.Empty, _mailkitConfig.From));
             emailMessage.To.AddRange(message.To);
             emailMessage.Subject = message.Subject;
 
